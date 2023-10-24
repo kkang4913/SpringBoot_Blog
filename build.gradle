@@ -1,0 +1,61 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.15'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.cos'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//Spring Boot 관련 의존성:
+	//Spring Boot Security: 보완을 구현하기 위한 라이브러리
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	//Spring Boot Web: 웹 애플리케이션을 구축하기 위한 핵심 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//Spring Boot Starter: MyBatis 와 Spring Boot 를 통합하고 설정하기 위한 의존성
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
+
+	//컴파일과 런타임 의존성:
+	//LomBok: Getter, Setter, 생성자 등을 생성할 때 어노테이션을 활용하여 자동 생성을 도와주는 라이브러리
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	//Oracle: 런타임 시에 사용되며, Oracle 데이터베이스에 연결하기 위한 Oracle JDBC 드라이버
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+
+	//개발환경 및 테스트 관련 의존성:
+	//devtools: 스프링 부트 애플리케이션을 개발하는 동안 코드 변경 감지 및 자동 재시작을 제공하는 라이브러리(Live Reload)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	//test: MyBatis 및 Spring Boot 애플리케이션을 테스트, 스프링 시큐리티를 테스트하기 위한 의존성 라이브러리
+	//testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+	//testImplementation 'org.springframework.security:spring-security-test'
+
+	//추가적인 의존성 라이브러리 설정(JSP,JSTL,Security 태그) :
+	implementation 'javax.servlet:jstl:1.2' // JSTL 의존성
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' // 내장 Tomcat과 JSP 지원
+	//implementation 'org.springframework.security:spring-security-taglibs' //스프링 부트 시큐리티 JSP 라이브러리 사용을 위해 추가
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
