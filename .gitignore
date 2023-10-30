@@ -32,6 +32,9 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+/gradlew
+/gradlew.bat
+/settings.gradle
 
 ### VS Code ###
 .vscode/
