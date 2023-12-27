@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- TypeHandler 설정 -->
+    <typeHandlers>
+        <!-- 여기에 사용할 TypeHandler 추가 -->
+        <typeHandler javaType="com.cos.blog.model.RoleType" handler="com.cos.blog.handler.RoleTypeHandler"/>
+    </typeHandlers>
+</configuration>
+
+
+
+

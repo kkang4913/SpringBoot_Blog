@@ -17,6 +17,8 @@ public class User {
     private String username;        //유저 이름
     private String password;        //유저 패스워드
     private String email;           //유저 이메일
-    private String role;
+
+
+    private RoleType role;
     private Timestamp createDate;   //생성 날짜
 }

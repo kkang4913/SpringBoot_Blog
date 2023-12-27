@@ -1,4 +1,4 @@
-package com.cos.blog.controller;
+package com.cos.blog.controllerTest;
 
 import com.cos.blog.testDto.Member;
 import org.springframework.web.bind.annotation.*;
