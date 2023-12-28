@@ -17,4 +17,8 @@ public interface UserRepository {
     List<User> findAll();
 
     List<User> selectUserPage(@Param("start") int start, @Param("end") int end);
+
+    void update(User user);
+
+    void deleteById(int id);
 }

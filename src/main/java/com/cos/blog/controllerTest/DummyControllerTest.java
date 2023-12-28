@@ -4,19 +4,18 @@ import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.function.Supplier;
 
+@Transactional
 @Slf4j
 @RestController
 public class DummyControllerTest {
-
 
 
     @Autowired
@@ -24,21 +23,23 @@ public class DummyControllerTest {
 
     /**
      * http://localhost:8080/blog/dummy/join
+     *
      * @param username 유저네임
      * @param password 패스워드
      * @param email    이메일
-     * @return  회원가입 완료
+     * @return 회원가입 완료
      */
     @PostMapping("/dummy/join")
-    public String join(String username, String password, String email){
+    public String join(String username, String password, String email) {
         System.out.println("DummyControllerTest.join 실행");
         System.out.println("username = " + username);
         System.out.println("password = " + password);
         System.out.println("email = " + email);
         return "회원가입이 완료되었습니다.";
     }
+
     @PostMapping("/dummy/join2")
-    public String join(User user){
+    public String join(User user) {
         System.out.println("DummyControllerTest.join 실행2");
         System.out.println(user.getId());
         System.out.println(user.getUsername());
@@ -50,18 +51,18 @@ public class DummyControllerTest {
     }
 
     @PostMapping("/dummy/join/repo")
-    public String joinRepo(User user){
+    public String joinRepo(User user) {
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 
 
         User userinfo = User.builder()
-                        .username(user.getUsername())
-                        .password(user.getPassword())
-                        .email(user.getEmail())
-                        .createDate(currentTimestamp)
-                    .build();
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .createDate(currentTimestamp)
+                .build();
 
-            //userinfo.setRole(RoleType.USER);
+        //userinfo.setRole(RoleType.USER);
 
         System.out.println(userinfo.getId());
         System.out.println(userinfo.getUsername());
@@ -73,22 +74,24 @@ public class DummyControllerTest {
         userRepository.save(user);
         return "회원가입이 완료되었습니다.";
     }
+
     /**
-     *  { } = 주소로 파라미터를 전달 받을 수 있음
+     * { } = 주소로 파라미터를 전달 받을 수 있음
      */
     @GetMapping("/dummy/user/{id}")
-    public User detail(@PathVariable int id){
+    public User detail(@PathVariable int id) {
         User user = userRepository.findById(id).orElseGet(new Supplier<User>() {
-            public User get(){
+            public User get() {
                 return new User();
             }
         });
         return user;
     }
+
     @GetMapping("/dummy/user/error/{id}")
     public User detail2(@PathVariable int id) {
 
-        User user = userRepository.findById(id).orElseThrow(()-> {
+        User user = userRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당되는 유저가 없습니다. id= " + id);
         });
         return user;
@@ -96,27 +99,56 @@ public class DummyControllerTest {
 
     /**
      * 모든 데이터 출력
+     *
      * @return = 모든 데이터
      */
     @GetMapping("/dummy/user")
-    public List<User> list(){
+    public List<User> list() {
         return userRepository.findAll();
     }
 
     @GetMapping("/dummy/user/page/{page}")
-    public List<User> PageList(@PathVariable int page){
+    public List<User> PageList(@PathVariable int page) {
         int size = 2;
         int start = page * size;
-        int end =(page + 1) * size;
+        int end = (page + 1) * size;
 
-        List<User> users = userRepository.selectUserPage(start,end);
-
-        log.info("start={}", start);
-        log.info("end={}", end);
+        List<User> users = userRepository.selectUserPage(start, end);
 
         return users;
     }
 
+    /**
+     * @param id
+     * @param requestUser password, email
+     * @return null
+     */
+    @PutMapping("/dummy/user/{id}")
+    public User update(@PathVariable int id, @RequestBody User requestUser) {
+        User user = userRepository.findById(id).orElseThrow(() -> {
+            return new IllegalArgumentException("수정에 실패하였습니다.");
+        });
 
+        user.setPassword(requestUser.getPassword());
+        user.setEmail(requestUser.getEmail());
 
+        userRepository.update(user);
+
+        return null;
+    }
+
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id) {
+        // 예외처리
+        try {
+            userRepository.deleteById(id);
+            // EmptyResultDataAccessException : 예외 클래스, 데이터 베이스 조회 결과가 비어있을 때 발생
+        } catch (EmptyResultDataAccessException e) {
+            return "삭제에 실패하였습니다. 해당 ID는 DB에 없습니다.";
+        }
+
+        return "삭제가 완료되었습니다. ID = " + id;
+    }
 }
+
+
