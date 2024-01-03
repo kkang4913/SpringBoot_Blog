@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 @Transactional
@@ -78,17 +79,17 @@ public class DummyControllerTest {
     /**
      * { } = 주소로 파라미터를 전달 받을 수 있음
      */
-    @GetMapping("/dummy/user/{id}")
-    public User detail(@PathVariable int id) {
-        User user = userRepository.findById(id).orElseGet(new Supplier<User>() {
-            public User get() {
-                return new User();
-            }
-        });
-        return user;
-    }
+//    @GetMapping("/dummy/user/{id}")
+//    public User detail(@PathVariable int id) {
+//        User user = userRepository.findById(id).orElseGet(new Supplier<User>() {
+//            public User get() {
+//                return new User();
+//            }
+//        });
+//        return user;
+//    }
 
-    @GetMapping("/dummy/user/error/{id}")
+    @GetMapping("/dummy/user/{id}")
     public User detail2(@PathVariable int id) {
 
         User user = userRepository.findById(id).orElseThrow(() -> {
@@ -137,17 +138,23 @@ public class DummyControllerTest {
         return null;
     }
 
-    @DeleteMapping("/dummy/user/{id}")
+    @DeleteMapping("/dummy/user/delete/{id}")
     public String delete(@PathVariable int id) {
-        // 예외처리
-        try {
-            userRepository.deleteById(id);
-            // EmptyResultDataAccessException : 예외 클래스, 데이터 베이스 조회 결과가 비어있을 때 발생
-        } catch (EmptyResultDataAccessException e) {
-            return "삭제에 실패하였습니다. 해당 ID는 DB에 없습니다.";
+        Optional<User> userInfo = userRepository.findById(id);
+        if (userInfo.isPresent()){
+              userRepository.deleteById(id);
+            return "아이디가 존재합니다" + id;
+        }else {
+            return "아이디가 존재하지 않습니다.";
         }
+//        // 예외처리
+//        try {
+//            userRepository.deleteById(id);
+//            // EmptyResultDataAccessException : 예외 클래스, 데이터 베이스 조회 결과가 비어있을 때 발생
+//        } catch (EmptyResultDataAccessException e) {
+//            return "삭제에 실패하였습니다. 해당 ID는 DB에 없습니다.";
+//        }
 
-        return "삭제가 완료되었습니다. ID = " + id;
     }
 }
 
