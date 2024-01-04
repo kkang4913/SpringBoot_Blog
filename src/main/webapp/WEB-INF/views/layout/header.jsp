@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +22,10 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <c:choose>
-            <c:when test="${empty sessionScope.principal}">
+            <c:when test="${empty principal}">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="/blog/user/loginForm">로그인</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/blog/user/joinForm">회원가입</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/blog/auth/loginForm">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/blog/auth/joinForm">회원가입</a></li>
                 </ul>
             </c:when>
             <c:otherwise>

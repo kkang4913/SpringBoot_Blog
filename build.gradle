@@ -24,7 +24,8 @@ repositories {
 dependencies {
 	//Spring Boot 관련 의존성:
 	//Spring Boot Security: 보완을 구현하기 위한 라이브러리
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-taglibs'
 
 	//Spring Boot Web: 웹 애플리케이션을 구축하기 위한 핵심 의존성
 	implementation 'org.springframework.boot:spring-boot-starter-web'
