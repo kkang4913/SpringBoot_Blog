@@ -21,4 +21,6 @@ public interface UserRepository {
     void update(User user);
 
     void deleteById(int id);
+
+    User finByUsernameAndPassword(String username, String password);
 }

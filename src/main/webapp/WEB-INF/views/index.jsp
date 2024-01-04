@@ -14,7 +14,7 @@
                 <p class="card-text">10km:</p>
                 <p class="card-text">Half(21km):</p>
                 <p class="card-text">Full(42.195km):</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
+                <a href="#" class="btn btn-primary">상세보기</a>
             </div>
         </div>
     </div>
