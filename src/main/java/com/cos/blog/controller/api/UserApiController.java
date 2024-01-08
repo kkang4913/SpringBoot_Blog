@@ -22,7 +22,7 @@ public class UserApiController {
     @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> save(@RequestBody User user){
         System.out.println("UserApiController : save 함수 호출됨");
-        log.info("userInfo={}",user);
+        System.out.println("APi 컨트롤러");
         user.setRole(RoleType.USER);
         userService.회원가입(user);
 

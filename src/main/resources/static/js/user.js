@@ -28,7 +28,7 @@ let index = {
             }else {
                 alert("회원가입이 완료되었습니다.")
                 console.log(resp);
-                location.href = "/blog";
+                location.href = "/";
             }
         }).fail(function (error){   //실패시에는 fail
             alert(JSON.stringify(error));

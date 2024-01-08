@@ -2,7 +2,7 @@
 <%@include file="../layout/header.jsp"%>
 
 <div class="container">
-    <form action="#" method="post">
+    <form action="/auth/loginProc" method="post">
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="username" class="form-control" name="username" id="username" placeholder="Enter username">

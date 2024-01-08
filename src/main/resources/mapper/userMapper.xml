@@ -44,7 +44,7 @@
                    ,EMAIL
                    ,CREATEDATE)
         VALUES (
-                1
+                USER_SEQ.NEXTVAL
                ,#{username}
                ,#{password}
                ,#{email}
@@ -67,15 +67,22 @@
         WHERE ID = #{id}
     </delete>
 
-    <select id="finByUsernameAndPassword" parameterType="com.cos.blog.model.User">
-        SELECT *
-            FROM
-                "USER"
-            WHERE
-                username = #{username}
-            AND
-                password = #{password}
+<!--    <select id="finByUsernameAndPassword" parameterType="com.cos.blog.model.User">-->
+<!--        SELECT *-->
+<!--            FROM-->
+<!--                "USER"-->
+<!--            WHERE-->
+<!--                username = #{username}-->
+<!--            AND-->
+<!--                password = #{password}-->
 
+<!--    </select>-->
+    <select id="findByUsername" parameterType="com.cos.blog.model.User">
+        SELECT *
+        FROM
+            "USER"
+        WHERE
+            username = #{username}
     </select>
 
 

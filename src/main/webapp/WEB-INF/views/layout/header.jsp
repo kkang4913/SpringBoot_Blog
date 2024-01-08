@@ -24,15 +24,15 @@
         <c:choose>
             <c:when test="${empty principal}">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="/blog/auth/loginForm">로그인</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/blog/auth/joinForm">회원가입</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/auth/loginForm">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
                 </ul>
             </c:when>
             <c:otherwise>
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="/blog/user/writeForm">글쓰기</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/blog/user/userForm">회원정보</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/blog/user/logout">로그아웃</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user/writeForm">글쓰기</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user/userForm">회원정보</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
                 </ul>
             </c:otherwise>
         </c:choose>
