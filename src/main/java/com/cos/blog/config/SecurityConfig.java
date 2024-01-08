@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 특정 주소로 접근 시 권한 및 인증을 미리 체크
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
-
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
