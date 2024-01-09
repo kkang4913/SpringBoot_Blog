@@ -21,6 +21,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     private PrincipalDetailService principalDetailService;
 
     @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(principalDetailService).passwordEncoder(encoderPWD());
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
             .csrf().disable()       // csrf 비활성화 : 테스트를 위함
@@ -36,10 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             .defaultSuccessUrl("/");
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(principalDetailService).passwordEncoder(encoderPWD());
-    }
+
 
     @Bean
     public BCryptPasswordEncoder encoderPWD(){
