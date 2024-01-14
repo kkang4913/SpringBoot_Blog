@@ -4,10 +4,7 @@
     <p>📞Phone 010 - XXXX - XXXX</p>
     <p>🏴서울특별시 XX구 XX로 XXX-X</p>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </body>
 </html>

@@ -10,11 +10,19 @@
     <title>Running Life</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+    <!-- Summernote CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <!-- jQuery (기본 버전) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 및 Popper.js (기본 버전) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Summernote JS (기본 버전) -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
 </head>
 <body>
-
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand" href="/">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -30,7 +38,7 @@
             </c:when>
             <c:otherwise>
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="/user/writeForm">글쓰기</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/board/saveForm">글쓰기</a></li>
                     <li class="nav-item"><a class="nav-link" href="/user/userForm">회원정보</a></li>
                     <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
                 </ul>
@@ -39,3 +47,4 @@
     </div>
 </nav>
 <br>
+

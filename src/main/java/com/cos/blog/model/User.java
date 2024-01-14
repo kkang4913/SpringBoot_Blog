@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Builder            //빌더 패턴을 구현, 객체를 생성할 때 객체의 속성을 명시적으로 지정하여 객체를 생성하거나 초기화하는 방법을 제공
 public class User {
 
-    private int id;                 //유저 아이디 , DBTable : USER_SEQ 사용  (NEXTVAL)
+    private int id;                 //유저 아이디 , DBTable : USER_SEQ 사용  (NEXT.VAL)
     private String username;        //유저 이름
     private String password;        //유저 패스워드
     private String email;           //유저 이메일

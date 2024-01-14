@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cos.blog.repository.BoardRepository">
+    <resultMap id="boardResultMap" type="com.cos.blog.model.Board">
+        <!--Board 엔티티 매핑-->
+        <id property="id" column="ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="count" column="COUNT"/>
+        <result property="createDate" column="CREATEDATE"/>
+        <!--user_id 와 관계 매핑-->
+        <association property="user" javaType="com.cos.blog.model.User">
+            <id property="id" column="ID"/>
+            <result property="username" column="USERNAME"/>
+            <result property="password" column="PASSWORD"/>
+            <result property="email" column="EMAIL"/>
+        </association>
+    </resultMap>
+
+    <insert id="save">
+        INSERT INTO
+            "BOARD"(ID,TITLE,CONTENT,COUNT,USERID,CREATEDATE)
+        VALUES
+            (BOARD_SEQ.NEXTVAL,#{title},#{content},#{count},#{user.id},CURRENT_DATE)
+    </insert>
+    
+    <select id="boardList" resultMap="boardResultMap">
+        SELECT *
+            FROM "BOARD"
+    </select>
+
+    <select id="boardListCount" resultType="int">
+        select count(ID) from "BOARD"
+    </select>
+
+    <select id="findById" resultType="com.cos.blog.model.Board">
+        SELECT * FROM "BOARD" WHERE ID = #{id}
+    </select>
+
+</mapper>

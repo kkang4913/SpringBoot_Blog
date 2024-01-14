@@ -4,14 +4,12 @@ import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 @Transactional
 @Slf4j
