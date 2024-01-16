@@ -22,7 +22,5 @@ public interface UserRepository {
 
     void deleteById(int id);
 
-    User finByUsernameAndPassword(String username, String password);
-
     Optional<User> findByUsername(String username);
 }

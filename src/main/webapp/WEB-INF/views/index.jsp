@@ -10,7 +10,7 @@
                     <div class="card" style="margin-bottom: 20px;">
                         <img class="card-img-top" src="${contextPath}/img/profile_img.png" alt="Card image" style="width:100%">
                         <div class="card-body">
-                            <h4 class="card-title">${board.title}</h4>
+                            <h4 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis ">${board.title}</h4>
                             <p>5km:</p>
                             <p>10km:</p>
                             <p>Half:</p>

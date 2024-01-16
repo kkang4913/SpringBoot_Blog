@@ -4,6 +4,13 @@ let index = {
            this.save();
         });
 
+        $("#btn-delete").on("click",() =>{
+           this.deleteById();
+        });
+        $("#btn-update").on("click",() =>{
+            this.update();
+        })
+
     },
 
     save() {
@@ -24,7 +31,47 @@ let index = {
         }).fail(function (error) {   //실패시에는 fail
             alert(JSON.stringify(error));
         });
+    },
+    deleteById(){
+       var id = $("#id").text();
+
+       $.ajax({
+           type: "DELETE",
+           url: "/api/board/" + id,
+           dataType: "JSON"
+       }).done(function (resp){
+           alert("삭제가 완료되었습니다.");
+           location.href="/";
+       }).fail(function (error){
+           alert(JSON.stringify(error));
+       });
+    },
+
+    update(){
+        let id = $("#id").val();
+
+        let data = {
+            title: $("#title").val(),
+            content: $("#content").val(),
+        };
+
+        $.ajax({
+            type: "PUT",
+            url:"/api/board/" + id,
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON"
+        }).done(function (resp){
+            alert("수정이 완료되었습니다.");
+            location.href = "/";
+        }).fail(function (error){
+            alert(JSON.stringify(error));
+        });
     }
+
+
+
+
     };
 
 index.init();

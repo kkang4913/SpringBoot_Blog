@@ -21,14 +21,13 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-//    @GetMapping("/")
-//    public String index(@AuthenticationPrincipal PrincipalDetail principal){ //컨트롤러에서 세션을 찾는 법
-//        return "index";
-//    }
-
+    /**
+     * 메인 페이지 호출
+     * @return index.jsp
+     */
     @GetMapping("/")
     public String index(Model model,
-                             @RequestParam(value = "currentPage",required = false,defaultValue = "1") int currentPage){
+            @RequestParam(value = "currentPage",required = false,defaultValue = "1") int currentPage){
         //게시글 총 갯수
         int listCount = boardService.글목록갯수();
 
@@ -44,15 +43,37 @@ public class BoardController {
 
         return "index";
     }
-    //18. 게시글 등록 페이지(추가)
+
+    /**
+     * 게시글 상세보기 페이지 호출
+     * @param id : 게시글 ID
+     * @return 게시글 ID + detail.jsp
+     */
+    @GetMapping("/board/{id}")
+    public String findById(@PathVariable int id, Model model){
+        model.addAttribute("board",boardService.글상세보기(id));
+        log.info("상세페이지 정보={}",boardService.글상세보기(id));
+        return "board/detail";
+    }
+
+    /**
+     * 게시글 등록 폼 호출
+     * @return saveForm.jsp
+     */
     @GetMapping("/board/saveForm")
     public String saveForm(){
         return "board/saveForm";
     }
 
-    @GetMapping("/board/{id}")
-    public String findById(@PathVariable int id, Model model){
+    /**
+     * 게시글 수정 폼 호출
+     * @param id : 게시글 ID
+     * @return updateForm.jsp
+     */
+    @GetMapping("/board/{id}/updateForm")
+    public String updateForm(@PathVariable int id, Model model){
+        System.out.println("업데이트 수정 폼 호출");
         model.addAttribute("board",boardService.글상세보기(id));
-        return "board/detail";
+        return "board/updateForm";
     }
 }

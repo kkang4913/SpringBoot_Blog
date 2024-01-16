@@ -10,18 +10,28 @@
         <result property="createDate" column="CREATEDATE"/>
         <!--user_id 와 관계 매핑-->
         <association property="user" javaType="com.cos.blog.model.User">
-            <id property="id" column="ID"/>
+            <id property="id" column="USERID"/>
             <result property="username" column="USERNAME"/>
             <result property="password" column="PASSWORD"/>
             <result property="email" column="EMAIL"/>
         </association>
     </resultMap>
 
-    <insert id="save">
+    <insert id="save" parameterType="com.cos.blog.model.Board">
         INSERT INTO
-            "BOARD"(ID,TITLE,CONTENT,COUNT,USERID,CREATEDATE)
+            "BOARD"(ID
+                    ,TITLE
+                    ,CONTENT
+                    ,COUNT
+                    ,USERID
+                    ,CREATEDATE)
         VALUES
-            (BOARD_SEQ.NEXTVAL,#{title},#{content},#{count},#{user.id},CURRENT_DATE)
+            (BOARD_SEQ.NEXTVAL
+            ,#{title}
+            ,#{content}
+            ,#{count}
+            ,#{user.id}
+            ,CURRENT_DATE)
     </insert>
     
     <select id="boardList" resultMap="boardResultMap">
@@ -33,8 +43,26 @@
         select count(ID) from "BOARD"
     </select>
 
-    <select id="findById" resultType="com.cos.blog.model.Board">
-        SELECT * FROM "BOARD" WHERE ID = #{id}
+    <select id="findById" resultMap="boardResultMap">
+        SELECT B.*, U.USERNAME
+        FROM BOARD B
+                 LEFT JOIN "USER" U ON B.USERID = U.ID
+        WHERE B.ID = #{id}
     </select>
 
+    <delete id="deleteById">
+        DELETE
+            FROM "BOARD"
+        WHERE ID = #{id}
+    </delete>
+
+    <update id="boardUpdate" parameterType="com.cos.blog.model.Board">
+        UPDATE
+            "BOARD"
+        SET
+            "TITLE" = #{title},
+            "CONTENT" = #{content}
+        WHERE
+            "ID" = #{id}
+    </update>
 </mapper>
