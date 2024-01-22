@@ -3,8 +3,7 @@ let index = {
         $("#btn-save").on("click",() => {
            this.save();
         });
-
-        $("#btn-delete").on("click",() =>{
+       $("#btn-delete").on("click",() =>{
            this.deleteById();
         });
         $("#btn-update").on("click",() =>{

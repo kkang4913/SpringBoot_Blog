@@ -33,10 +33,11 @@
             ,#{user.id}
             ,CURRENT_DATE)
     </insert>
-    
+
     <select id="boardList" resultMap="boardResultMap">
         SELECT *
-            FROM "BOARD"
+        FROM "BOARD"
+        ORDER BY ID DESC
     </select>
 
     <select id="boardListCount" resultType="int">
@@ -44,9 +45,18 @@
     </select>
 
     <select id="findById" resultMap="boardResultMap">
-        SELECT B.*, U.USERNAME
+        SELECT B.ID
+               ,B.TITLE
+               ,B.CONTENT
+               ,B.COUNT
+               ,B.USERID
+               ,B.CREATEDATE
+               ,U.USERNAME
         FROM BOARD B
-                 LEFT JOIN "USER" U ON B.USERID = U.ID
+                 LEFT JOIN
+                    "USER" U
+                 ON
+                    B.USERID = U.ID
         WHERE B.ID = #{id}
     </select>
 

@@ -30,12 +30,12 @@ public class BoardController {
             @RequestParam(value = "currentPage",required = false,defaultValue = "1") int currentPage){
         //게시글 총 갯수
         int listCount = boardService.글목록갯수();
-
         //클릭한 페이지, 총 게시글 수 전달
         PageInfo paging = Pagination.getPageInfo(currentPage,listCount);
 
         //게시글 목록
         ArrayList<Board> boardList = boardService.글목록(paging);
+
 
 
         model.addAttribute("boards",boardList);
@@ -52,7 +52,6 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String findById(@PathVariable int id, Model model){
         model.addAttribute("board",boardService.글상세보기(id));
-        log.info("상세페이지 정보={}",boardService.글상세보기(id));
         return "board/detail";
     }
 

@@ -3,6 +3,7 @@ package com.cos.blog.repository;
 import com.cos.blog.model.Board;
 import com.cos.blog.paging.Vo.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.Optional;
 @Mapper
 public interface BoardRepository {
 
-    //18.ID 찾기
+    //18.게시글 상세보기를 위한 ID 찾기
     Optional<Board> findById(int id);
 
     //18. 게시글(추가)
@@ -24,7 +25,7 @@ public interface BoardRepository {
     void boardUpdate(Board board);
 
     //18.게시글(페이징)
-    ArrayList<Board> boardList(PageInfo paging, RowBounds rowBounds);
+    ArrayList<Board> boardList(RowBounds rowBounds);
 
     //18.게시글(페이징: 게시글 수)
     int boardListCount();

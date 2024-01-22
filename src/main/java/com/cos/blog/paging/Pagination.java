@@ -15,10 +15,9 @@ public class Pagination {
         int maxPage;            // 전체 페이지 중 가장 마지막 페이지
         int startPage;          // 현재 페이지에서 보여질 페이징 버튼의 시작 페이지
         int endPage;            // 현재 페이지에서 보여질 페이징 버튼의 끝 페이지
-
         int boardLimit = 8;    // 한 페이지에서 보여질 게시글 갯수
 
-        // * maxPage :
+        // * maxPage  :
         /*
          * 1. (총 게시글 수 / 한 페이지 게시글 수) => 실수형이 나오고, + 0.9
          * => ex) 26 / 10 = 2.6,

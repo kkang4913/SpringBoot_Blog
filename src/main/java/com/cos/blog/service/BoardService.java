@@ -47,14 +47,15 @@ public class BoardService {
 
     public Board 글상세보기(int id) {
         Optional<Board> boardDetail = boardRepository.findById(id);
-        return boardDetail.orElseThrow(() -> new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다."));
+        return boardDetail.orElseThrow(()
+                -> new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다."));
     }
     public ArrayList<Board> 글목록(PageInfo paging) {
-        int offset =(paging.getCurrentPage()-1) * paging.getBoardLimit();
-
+        int offset =(paging.getCurrentPage()- 1) * paging.getBoardLimit();
         RowBounds rowBounds = new RowBounds(offset,paging.getBoardLimit());
 
-        return boardRepository.boardList(paging,rowBounds);
+
+        return boardRepository.boardList(rowBounds);
     }
 
     public int 글목록갯수() {

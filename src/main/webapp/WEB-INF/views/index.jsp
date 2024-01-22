@@ -25,7 +25,6 @@
 <!-- 페이징 처리 -->
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-
         <!-- 이전 -->
         <c:if test="${paging.currentPage eq 1}">
             <li class="page-item">
