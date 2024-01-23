@@ -26,6 +26,23 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
+    public void 회원수정(User user){
+        User persistance = userRepository.findById(user.getId()).orElseThrow(() ->{
+            return new IllegalArgumentException("회원 찾기 실패");
+        });
+
+        String rawPassword = user.getPassword(); //원문
+        String encPassword = encoder.encode(rawPassword);   //해쉬
+
+        persistance.setPassword(encPassword);
+        persistance.setEmail(user.getEmail());
+
+        userRepository.update(persistance);
+    }
+
+
+
 //    @Transactional
 //    public User 로그인(User user) {
 //      return userRepository.finByUsernameAndPassword(user.getUsername(),user.getPassword());

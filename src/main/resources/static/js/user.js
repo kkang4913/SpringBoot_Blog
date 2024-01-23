@@ -3,9 +3,9 @@ let index = {
         $("#btn-save").on("click",() => {
            this.save();
         });
-        // $("#btn-login").on("click",() =>{
-        //     this.login();
-        // })
+        $("#btn-update").on("click",() =>{
+            this.update();
+        })
     },
 
     save(){
@@ -55,6 +55,28 @@ let index = {
     //         alert(JSON.stringify(error));
     //     });
     // },
+
+    update(){
+        let data ={
+            id: $("#id").val(),
+            username: $("#username").val(),
+            password: $("#password").val(),
+            email: $("#email").val(),
+        };
+
+        $.ajax({
+            type: "PUT",        //요청방식
+            url: "/user",       //호출경로
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON"
+        }).done(function (repo){
+            alert("수정이 완료되었습니다.");
+            location.href = "/";
+        }).fail(function (error){
+           alert(JSON.stringify(error));
+        });
+    }
 };
 
 index.init();

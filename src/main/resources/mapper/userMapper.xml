@@ -54,9 +54,10 @@
 
     <update id="update" parameterType="com.cos.blog.model.User">
         UPDATE "USER"
-            SET PASSWORD = #{password},
-                EMAIL = #{email},
-                CREATEDATE = CURRENT_DATE
+            <set>
+                <if test="password != null">PASSWORD = #{password},</if>
+                <if test="email != null">EMAIL = #{email},</if>
+            </set>
         WHERE ID = #{id}
 
     </update>
