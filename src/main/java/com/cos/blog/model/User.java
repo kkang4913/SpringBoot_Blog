@@ -21,4 +21,6 @@ public class User {
 
     private RoleType role;
     private Timestamp createDate;   //생성 날짜
+
+    private String oauth;
 }

@@ -42,13 +42,15 @@
                    ,USERNAME
                    ,PASSWORD
                    ,EMAIL
-                   ,CREATEDATE)
+                   ,CREATEDATE
+                   ,OAUTH)
         VALUES (
                 USER_SEQ.NEXTVAL
                ,#{username}
                ,#{password}
                ,#{email}
                ,CURRENT_DATE
+               ,#{oauth, jdbcType=VARCHAR}
                )
     </insert>
 

@@ -1,6 +1,5 @@
 package com.cos.blog.service;
 
-import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,9 @@ public class UserService {
     public void 회원가입(User user) {
         String rawPassword = user.getPassword(); //원문 패스워드
         String encPassword = encoder.encode(rawPassword); // 해쉬 암호화
-        System.out.println("서비스");
+
         user.setPassword(encPassword);
+
         userRepository.save(user);
     }
 
@@ -41,6 +41,13 @@ public class UserService {
         userRepository.update(persistance);
     }
 
+    @Transactional
+    public User 회원찾기(String username){
+        User user = userRepository.findByUsername(username).orElseGet(() -> {
+            return new User();
+        });
+        return user;
+    }
 
 
 //    @Transactional

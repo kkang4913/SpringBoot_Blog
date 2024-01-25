@@ -55,6 +55,7 @@ dependencies {
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' // 내장 Tomcat과 JSP 지원
 	//implementation 'org.springframework.security:spring-security-taglibs' //스프링 부트 시큐리티 JSP 라이브러리 사용을 위해 추가
 
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
 
 

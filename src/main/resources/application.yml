@@ -30,3 +30,6 @@ spring:
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
 
+cos:
+  key: team240
+

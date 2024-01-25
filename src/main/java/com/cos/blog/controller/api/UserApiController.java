@@ -31,9 +31,10 @@ public class UserApiController {
     public ResponseDto<Integer> save(@RequestBody User user){
         System.out.println("UserApiController : save 함수 호출됨");
         System.out.println("APi 컨트롤러");
-        user.setRole(RoleType.USER);
-        userService.회원가입(user);
 
+        user.setRole(RoleType.USER);
+        log.info("유저 정보={}",user);
+        userService.회원가입(user);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
